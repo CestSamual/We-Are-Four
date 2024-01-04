@@ -1,3 +1,4 @@
+var postcodeInputEl = getElementById("postcodeInput");
 // DOM Elements
 
 var postcodeBtnEl = getElementById("postcodeBtn");
