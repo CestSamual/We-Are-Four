@@ -1,4 +1,7 @@
 var postcodeInputEl = getElementById("postcodeInput");
+// DOM Elements
+
+var postcodeBtnEl = getElementById("postcodeBtn");
 
 var postcode = "L40TH";
 function retrieveMemberID() {
