@@ -1,15 +1,26 @@
-var postcodeInputEl = getElementById("postcodeInput");
-// DOM Elements
 
-var postcodeBtnEl = getElementById("postcodeBtn");
+document.addEventListener("DOMContentLoaded", function () {
+  var postcodeInputEl = document.getElementById("postcodeInput");
+  var postcodeBtnEl = document.getElementById("postcodeBtn");
+  var mailToLinkEl = document.getElementById("mailToLink");
 
-var postcode = "L40TH";
-function retrieveMemberID() {
+  
+
+
+  postcodeBtnEl.addEventListener("click", function (event) {
+    event.preventDefault(); 
+
+    var postcode = postcodeInputEl.value;
+    retrieveMemberID(postcode);
+    retrieveCID(postcode);
+})
+
+function retrieveMemberID(postcode) {
   var queryURL =
     "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=" +
     postcode +
     "&skip=0&take=1";
-  // console.log(queryURL);
+  
 
   fetch(queryURL)
     .then(function (response) {
@@ -36,12 +47,13 @@ function retrieveEmail(memberID) {
     .then(function (data) {
       var email = data.value[0].email;
       console.log(email);
+      mailToLinkEl.href = "mailto:" + email;
     });
 }
 
-retrieveMemberID();
 
-function retrieveCID() {
+
+function retrieveCID(postcode) {
   var queryURL = "https://findthatpostcode.uk//postcodes/" + postcode + ".json";
   // console.log(queryURL);
 
@@ -54,6 +66,7 @@ function retrieveCID() {
       console.log("pcon:", pconValue);
     });
 }
+10-psuedocode-a-complete-draft-of-the-js
 retrieveCID();
 
 
@@ -78,3 +91,7 @@ retrieveCID();
 
 
 
+
+
+});
+main
