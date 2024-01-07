@@ -14,28 +14,31 @@
     <header class="bg-dark text-light text-center p-2 fixed-top">
         <h1 class="fw-bolder">WE ARE MANY</h1>
     </header>
-    <section class="text-center py-5">
-        <div class="py-5 container">
-            <div class="row justify-content-center">
-                <h2 class="text-uppercase fw-bolder fst-italic display-4 col-10">I want my Member of Parliament to know
+    <section class="text-center py-5 d-lg-flex">
+        <div class="py-5 container col-lg-6 ">
+            <div class="row justify-content-center flex-lg-column align-items-lg-center">
+                <h2 class="text-uppercase fw-bolder fst-italic display-4 col-sm-10 ">I want my Member of
+                    Parliament
+                    to know
                     that
                     people
                     who
                     rent have a lot of votes</h2>
-                <img class="img-fluid col-8 mx-auto" src="assets/vote.png" id="voteImg">
+                <img class="img-fluid col-sm-8 col-lg-4 mx-auto d-lg-none" src="assets/vote.png" id="voteImg">
 
-                <form class="row justify-content-center">
+                <form class="row justify-content-center flex-lg-column align-items-lg-center">
                     <div class="col-6">
                         <input type="text" class="form-control rounded-0 text-center fst-italic fw-light"
                             id="postcodeInput" maxlength="8" placeholder="postcode">
                     </div>
-                    <button type="submit" class="btn btn-dark rounded-0 mt-3 col-10" id="postcodeBtn"><u>HOW MANY ARE
+                    <button type="submit" class="btn btn-dark rounded-0 mt-3 col-10 col-lg-6" id="postcodeBtn"><u>HOW
+                            MANY ARE
                             WITH
                             ME?</u></button>
                 </form>
             </div>
         </div>
-        <div class="pb-5 d-none" id="displayResults">
+        <div class="pb-5 col-lg-6 d-none" id="displayResults">
             <div class="mt-1">
                 <p class=""> <strong class="text-uppercase fw-bolder fst-italic display-3 col-10"
                         id="areRenting">00%</strong>
