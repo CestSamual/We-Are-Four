@@ -17,17 +17,16 @@
     <section class="text-center d-lg-flex">
         <div class="py-3 container col-lg-6 ">
             <div class="row justify-content-center flex-lg-column align-items-lg-center">
-                <h2 class="text-uppercase fw-bolder fst-italic display-5 col-sm-10 ">I want my Member Parliament to know
+                <h2 class="text-uppercase fw-bolder fst-italic display-5 col-sm-10 ">I want my Member of Parliament to know
                     that people who rent have a lot of votes</h2>
-
-
+                <div id="userFeedback" class="invalid-feedback d-none"></div>
                 <form class="row justify-content-center flex-lg-column align-items-lg-center">
                     <div class="col-6">
                         <input type="text" class="form-control rounded-0 text-center fst-italic fw-light"
-                            id="postcodeInput" maxlength="8" placeholder="postcode">
-                    </div>
-                    <button type="submit" class="btn btn-dark rounded-0 mt-3 col-10 col-lg-6" id="postcodeBtn"><u>HOW
-                            MANY ARE WITH ME?</u></button>
+                            id="postcodeInput" maxlength="8" placeholder="Postcode">
+                          <div id="userFeedback" class="invalid-feedback d-none ">Please enter a valid postcode (8 digits).</div>
+                      </div>
+                    <button type="submit" class="btn btn-dark rounded-0 mt-3 col-10 col-lg-6" id="postcodeBtn"><u>HOW MANY ARE WITH ME?</u></button>
                 </form>
             </div>
         </div>
