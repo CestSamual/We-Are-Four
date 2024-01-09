@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var postcode = postcodeInputEl.value;
     retrieveMemberID(postcode);
     retrieveCID(postcode);
-    retrieveONS();
     
 })
 //Members API Member ID fetch
