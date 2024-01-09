@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var areRentingEl = document.getElementById("areRenting");
   var rentOutOfEl = document.getElementById("rentOutOf");
   var peopleInAreaEl = document.getElementById("peopleInArea");
-
-  
+  var displayResultsEl = document.getElementById("displayResults")
+  var voteImgEL = document.getElementById("voteImg")
 
   //Event Listener for postcode submission click
   postcodeBtnEl.addEventListener("click", function (event) {
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.log("Incorrect Postcode, wrong format")
   }
+    
     
 })
 //Members API Member ID fetch
@@ -97,10 +98,13 @@ function retrieveONS(pconValue){
     var rentingStat = statistics[6] + statistics[7];
     var rentingPercentStat = (rentingStat / sumStat) * 100;
     //Parse to HTML elements
+    voteImgEL.classList.add("d-none");
+    displayResultsEl.classList.remove("d-none");
     areRentingEl.innerHTML = rentingPercentStat.toFixed(0) + "%";
     rentOutOfEl.innerHTML = rentingStat;
     peopleInAreaEl.innerHTML = sumStat;
   })
+  
 }
 // Validation function for the postcode
 function validatePostcode(postcode) {
