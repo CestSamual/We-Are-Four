@@ -14,8 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault(); 
 
     var postcode = postcodeInputEl.value;
-    retrieveMemberID(postcode);
-    retrieveCID(postcode);
+
+    if (validatePostcode(postcode)){  
+      retrieveMemberID(postcode);
+      retrieveCID(postcode); 
+  } else {
+    console.log("Incorrect Postcode, wrong format")
+  }
     
 })
 //Members API Member ID fetch
@@ -97,5 +102,26 @@ function retrieveONS(pconValue){
     peopleInAreaEl.innerHTML = sumStat;
   })
 }
+// Validation function for the postcode
+function validatePostcode(postcode) {
+  // Check if the postcode is greater than 8 characters
+  if (postcode.length > 8) {
+    return false;
+  }
+
+  // Check if the postcode includes at least 2 numbers
+  var numbersCount = postcode.replace(/[^0-9]/g, "").length;
+  if (numbersCount < 2) {
+    return false;
+  }
+
+  // Check if the postcode includes any special characters
+  if (/[^a-zA-Z0-9]/.test(postcode)) {
+    return false;
+  }
+
+  return true;
+}
+
 
 });
