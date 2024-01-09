@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var areRentingEl = document.getElementById("areRenting");
   var rentOutOfEl = document.getElementById("rentOutOf");
   var peopleInAreaEl = document.getElementById("peopleInArea");
-
+  var displayResultsEl = document.getElementById("displayResults")
   
 
   //Event Listener for postcode submission click
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var postcode = postcodeInputEl.value;
     retrieveMemberID(postcode);
     retrieveCID(postcode);
+    
     
 })
 //Members API Member ID fetch
@@ -92,10 +93,12 @@ function retrieveONS(pconValue){
     var rentingStat = statistics[6] + statistics[7];
     var rentingPercentStat = (rentingStat / sumStat) * 100;
     //Parse to HTML elements
+    displayResultsEl.classList.remove("d-none");
     areRentingEl.innerHTML = rentingPercentStat.toFixed(0) + "%";
     rentOutOfEl.innerHTML = rentingStat;
     peopleInAreaEl.innerHTML = sumStat;
   })
+  
 }
 
 });
