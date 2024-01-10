@@ -111,7 +111,7 @@ function retrieveONS(pconValue){
 // Validation function for the postcode
 function validatePostcode(postcode) {
   // Check if the postcode is greater than 8 characters
-  if (postcode.length > 8) {
+  if (postcode.length > 8 || postcode.ength < 4){
     return false;
   }
 
