@@ -15,11 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var postcode = postcodeInputEl.value;
 
-    if (validatePostcode(postcode)){  
+    if (validatePostcode(postcode)){
+      document.getElementById("postcodeInput").classList.remove("is-invalid");  
       retrieveMemberID(postcode);
       retrieveCID(postcode); 
   } else {
-    document.getElementById("userFeedback").classList.remove("d-none");
+    document.getElementById("postcodeInput").classList.add("is-invalid");
     console.log("Incorrect Postcode, wrong format")
   }
     
@@ -121,7 +122,7 @@ function validatePostcode(postcode) {
   }
 
   // Check if the postcode includes any special characters
-  if (/[^a-zA-Z0-9]/.test(postcode)) {
+  if (/[^a-zA-Z0-9\s]/.test(postcode)) {
     return false;
   }
 
