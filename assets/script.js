@@ -100,7 +100,7 @@ function retrieveONS(pconValue){
     var rentingStat = statistics[6] + statistics[7];
     var rentingPercentStat = (rentingStat / sumStat) * 100;
     //Parse to HTML elements
-    voteImgEL.classList.add("d-none");
+    voteImgEL.classList.add("d-lg-none");
     displayResultsEl.classList.remove("d-none");
     areRentingEl.innerHTML = rentingPercentStat.toFixed(0) + "%";
     rentOutOfEl.innerHTML = rentingStat;
