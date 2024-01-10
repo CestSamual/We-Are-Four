@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       retrieveMemberID(postcode);
       retrieveCID(postcode); 
   } else {
+    document.getElementById("userFeedback").classList.remove("d-none");
     console.log("Incorrect Postcode, wrong format")
   }
     
