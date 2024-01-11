@@ -31,6 +31,7 @@ To utilise the application, enter a postcode and click the "How Many Are With Me
 ![Web-page image before postcode is searched](assets/Homepage-1.png)
 
 ### Application webpage after postcode search
-![Web-page image after postcode is searched](assets/Homepage-2.png)
+![image](https://github.com/CestSamual/We-Are-Many/assets/148571604/ba6b3c58-715e-4751-a748-2b2c0b4f37d8)
+
 
 ## [License](LICENSE)
