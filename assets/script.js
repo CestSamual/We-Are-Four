@@ -6,14 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var areRentingEl = document.getElementById("areRenting");
   var rentOutOfEl = document.getElementById("rentOutOf");
   var peopleInAreaEl = document.getElementById("peopleInArea");
-  var postcodeAreaEl = document.getElementById("postcodeArea");
-  var displayResultsEl = document.getElementById("displayResults");
-  var voteImgEL = document.getElementById("voteImg");
-  var history = JSON.parse(localStorage.getItem("search")) || [];
+  var displayResultsEl = document.getElementById("displayResults")
+  var voteImgEL = document.getElementById("voteImg")
 
   //Event Listener for postcode submission click
   postcodeBtnEl.addEventListener("click", function (event) {
-    event.preventDefault();
+    event.preventDefault(); 
 
     var postcode = postcodeInputEl.value;
 
@@ -24,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     document.getElementById("postcodeInput").classList.add("is-invalid");
     console.log("Incorrect Postcode, wrong format")
-  }   
+  }
+    
     
 })
 //Members API Member ID fetch
@@ -33,55 +32,55 @@ function retrieveMemberID(postcode) {
     "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=" +
     postcode +
     "&skip=0&take=1";
+  
 
-    fetch(queryURL)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var memberID =
-          data.items[0].value.currentRepresentation.member.value.id;
-        console.log(memberID);
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var memberID = data.items[0].value.currentRepresentation.member.value.id;
+      console.log(memberID);
 
-        // Pass memberID to retrieveEmail function
-        retrieveEmail(memberID);
-      });
-  }
-  //Memebers API email fetch
-  function retrieveEmail(memberID) {
-    var queryURL =
-      "https://members-api.parliament.uk/api/Members/" + memberID + "/Contact";
-    // console.log(queryURL);
+      // Pass memberID to retrieveEmail function
+      retrieveEmail(memberID);
+    });
+}
+//Memebers API email fetch
+function retrieveEmail(memberID) {
+  var queryURL =
+    "https://members-api.parliament.uk/api/Members/" + memberID + "/Contact";
+  // console.log(queryURL);
 
-    fetch(queryURL)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var email = data.value[0].email;
-        console.log(email);
-        mailToLinkEl.href = "mailto:" + email;
-      });
-  }
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var email = data.value[0].email;
+      console.log(email);
+      mailToLinkEl.href = "mailto:" + email;
+    });
+}
 
-  //FTP API fetch
-  function retrieveCID(postcode) {
-    var queryURL =
-      "https://findthatpostcode.uk//postcodes/" + postcode + ".json";
-    // console.log(queryURL);
 
-    fetch(queryURL)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var pconValue = data.data.attributes.pcon;
-        console.log("pcon:", pconValue);
-        //Pass pconValue to retrieveONS function
-        retrieveONS(pconValue);
-        console.log(pconValue);
-      });
-  }
+//FTP API fetch
+function retrieveCID(postcode) {
+  var queryURL = "https://findthatpostcode.uk//postcodes/" + postcode + ".json";
+  // console.log(queryURL);
+
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var pconValue = data.data.attributes.pcon;
+      console.log("pcon:", pconValue);
+      //Pass pconValue to retrieveONS function
+      retrieveONS(pconValue);
+      console.log(pconValue);
+    });
+}
 
 //ONS API fetch
 function retrieveONS(pconValue){
