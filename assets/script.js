@@ -16,17 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
 
     var postcode = postcodeInputEl.value;
-    retrieveMemberID(postcode);
-    retrieveCID(postcode);
-    history.push(postcode);
-    localStorage.setItem("search", JSON.stringify(history));
-  });
-  //Members API Member ID fetch
-  function retrieveMemberID(postcode) {
-    var queryURL =
-      "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=" +
-      postcode +
-      "&skip=0&take=1";
+
+    if (validatePostcode(postcode)){
+      document.getElementById("postcodeInput").classList.remove("is-invalid");  
+      retrieveMemberID(postcode);
+      retrieveCID(postcode); 
+  } else {
+    document.getElementById("postcodeInput").classList.add("is-invalid");
+    console.log("Incorrect Postcode, wrong format")
+  }   
+    
+})
+//Members API Member ID fetch
+function retrieveMemberID(postcode) {
+  var queryURL =
+    "https://members-api.parliament.uk/api/Location/Constituency/Search?searchText=" +
+    postcode +
+    "&skip=0&take=1";
 
     fetch(queryURL)
       .then(function (response) {
@@ -77,39 +83,52 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  //ONS API fetch
-  function retrieveONS(pconValue) {
-    var queryURL =
-      "https://api.beta.ons.gov.uk/v1/datasets/TS054/editions/2021/versions/4/json?area-type=wpc," +
-      pconValue;
+//ONS API fetch
+function retrieveONS(pconValue){
+  var queryURL = "https://api.beta.ons.gov.uk/v1/datasets/TS054/editions/2021/versions/4/json?area-type=wpc," + pconValue;
 
-    fetch(queryURL)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var statistics = data.observations;
-        //Calculation variables
-        var sumStat = 0;
-        for (var i = 0; i < statistics.length; i++) {
-          sumStat += statistics[i];
-        }
-        var rentingStat = statistics[6] + statistics[7];
-        var rentingPercentStat = (rentingStat / sumStat) * 100;
-        //Parse to HTML elements
-        voteImgEL.classList.add("d-none");
-        displayResultsEl.classList.remove("d-none");
-        areRentingEl.innerHTML = rentingPercentStat.toFixed(0) + "%";
-        rentOutOfEl.innerHTML = rentingStat;
-        peopleInAreaEl.innerHTML = sumStat;
-        postcodeAreaEl.innerHTML = data.dimensions[0].options[0].label;
-        console.log(data.dimensions[1].label);
-      });
-    //Get most recent submission
+  fetch(queryURL)
+  .then(function (response){
+    return response.json();
+  })
+  .then(function (data) {
+    var statistics = data.observations;
+    //Calculation variables
+    var sumStat = 0;
+    for (var i = 0; i < statistics.length; i++){
+      sumStat += statistics[i];
+    };
+    var rentingStat = statistics[6] + statistics[7];
+    var rentingPercentStat = (rentingStat / sumStat) * 100;
+    //Parse to HTML elements
+    voteImgEL.classList.add("d-lg-none");
+    displayResultsEl.classList.remove("d-none");
+    areRentingEl.innerHTML = rentingPercentStat.toFixed(0) + "%";
+    rentOutOfEl.innerHTML = rentingStat;
+    peopleInAreaEl.innerHTML = sumStat;
+  })
+  
+}
+// Validation function for the postcode
+function validatePostcode(postcode) {
+  // Check if the postcode is greater than 8 characters
+  if (postcode.length > 8 || postcode.ength < 4){
+    return false;
   }
-  if (history.length > 0) {
-    retrieveMemberID(history[history.length - 1]);
-    retrieveCID(history[history.length - 1]);
-    postcodeInputEl.innerHTML = history[history.length - 1];
+
+  // Check if the postcode includes at least 2 numbers
+  var numbersCount = postcode.replace(/[^0-9]/g, "").length;
+  if (numbersCount < 2) {
+    return false;
   }
+
+  // Check if the postcode includes any special characters
+  if (/[^a-zA-Z0-9\s]/.test(postcode)) {
+    return false;
+  }
+
+  return true;
+}
+
+
 });
